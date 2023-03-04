@@ -2,6 +2,8 @@ library(tidyverse)
 library(shiny)
 temp_data <- read_delim("UAH-lower-troposphere-long.csv.bz2")
 
+row_info <- nrow(temp_data)
+
 # Define UI for application that draws a histogram
 ui <- fluidPage(
   
@@ -11,6 +13,7 @@ ui <- fluidPage(
                        p("This is an app designed to relay certain data trends on global temperature changes. The ", em("temp"), "value is
                          measured in ", strong("Celsius.")),
                        p("The data used for this app is available",a("here",href="https://www.nsstc.uah.edu/data/msu/v6.0/tlt/uahncdc_lt_6.0.txt")),
+                       p("There are ",row_info, "rows of data within the set"),
                        p("Below is a table of randomly selected rows to show how the data is structured:"),
                        mainPanel(tableOutput("sample_data")),
               ),
@@ -124,6 +127,8 @@ server <- function(input, output) {
       paste("The average temperature globally for your selected period is:", .)
     
   })
+  
+
   
   
 }
